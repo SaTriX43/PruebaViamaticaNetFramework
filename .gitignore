@@ -1,0 +1,52 @@
+﻿# Visual Studio Solution and Project Files
+*.suo
+*.user
+*.opensdf
+*.sdf
+*.bak
+*.log
+*.cache
+*.obj
+*.pdb
+*.ilk
+*.lib
+*.exp
+*.dll
+*.exe
+*.map
+*.lic
+*.tlog
+*.ipch
+_UpgradeReport_Files/
+
+# Visual Studio specific folders
+.vs/
+TestResults/
+[Bb]in/
+[Oo]bj/
+App_Data/  # Si no versionas bases de datos locales
+
+# NuGet packages
+packages/
+*.nupkg
+
+# Resharper and other extensions
+*.resharper
+*.dotSettings
+*.TeamCity
+.idea/
+
+# Azure Tools
+.publishprofile
+
+# Node.js and Frontend (if applicable)
+node_modules/
+npm-debug.log
+
+# macOS specific files
+.DS_Store
+
+# Windows specific files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
