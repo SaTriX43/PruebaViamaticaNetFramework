@@ -141,15 +141,31 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PeliculaSalaCineController.cs" />
+    <Compile Include="Controllers\PeliculasController.cs" />
+    <Compile Include="Controllers\SalasCineController.cs" />
     <Compile Include="DAL\IPeliculaRepository.cs" />
+    <Compile Include="DAL\IPeliculaSalaCineRepository.cs" />
+    <Compile Include="DAL\ISalaCineRepository.cs" />
     <Compile Include="DAL\PeliculaRepository.cs" />
+    <Compile Include="DAL\PeliculaSalaCineRepository.cs" />
+    <Compile Include="DAL\SalaCineRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Pelicula.cs" />
     <Compile Include="Models\PeliculaSalaCine.cs" />
     <Compile Include="Models\SalaCine.cs" />
+    <Compile Include="Models\ViewModels\AsignarPeliculaSalaViewModel.cs" />
+    <Compile Include="Models\ViewModels\PeliculaViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IPeliculaSalaCineService.cs" />
+    <Compile Include="Services\IPeliculaService.cs" />
+    <Compile Include="Services\ISalaCineService.cs" />
+    <Compile Include="Services\PeliculaSalaCineService.cs" />
+    <Compile Include="Services\PeliculaService.cs" />
+    <Compile Include="Services\SalaCineService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -199,12 +215,19 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Peliculas\Index.cshtml" />
+    <Content Include="Views\Peliculas\Details.cshtml" />
+    <Content Include="Views\Peliculas\Create.cshtml" />
+    <Content Include="Views\Peliculas\Edit.cshtml" />
+    <Content Include="Views\Peliculas\Delete.cshtml" />
+    <Content Include="Views\SalasCine\Index.cshtml" />
+    <Content Include="Views\SalasCine\Disponibilidad.cshtml" />
+    <Content Include="Views\PeliculaSalaCine\Asignar.cshtml" />
+    <Content Include="Views\PeliculaSalaCine\Confirmacion.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\ViewModels\" />
-    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

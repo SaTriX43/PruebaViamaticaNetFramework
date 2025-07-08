@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Inicio";
+}
+
+<div class="jumbotron text-center mt-4">
+    <h1 class="display-4">¡Bienvenido a tu Aplicación de Gestión de Cine!</h1>
+    <p class="lead">Explora y administra películas, salas de cine y sus asignaciones.</p>
+    <hr class="my-4">
+    <p>Utiliza la barra de navegación superior para acceder a las diferentes secciones de la aplicación.</p>
+    <p class="mt-4">
+        @Html.ActionLink("Ver Películas", "Index", "Peliculas", null, new { @class = "btn btn-primary btn-lg mx-2" })
+        @Html.ActionLink("Verificar Salas de Cine", "Disponibilidad", "SalasCine", null, new { @class = "btn btn-secondary btn-lg mx-2" })
+        @Html.ActionLink("Asignar Película a Sala", "Asignar", "PeliculaSalaCine", null, new { @class = "btn btn-success btn-lg mx-2" })
+    </p>
+</div>
+
+<div class="row text-center mt-5">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Gestión de Películas</h5>
+                <p class="card-text">Agrega, edita, visualiza o elimina películas de tu catálogo.</p>
+                <a href="@Url.Action("Index", "Peliculas")" class="btn btn-outline-primary">Ir a Películas</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Disponibilidad de Salas</h5>
+                <p class="card-text">Verifica el estado actual de las salas de cine.</p>
+                <a href="@Url.Action("Disponibilidad", "SalasCine")" class="btn btn-outline-secondary">Verificar Salas</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Asignación de Proyecciones</h5>
+                <p class="card-text">Programa películas en las salas de cine disponibles.</p>
+                <a href="@Url.Action("Asignar", "PeliculaSalaCine")" class="btn btn-outline-success">Asignar Película</a>
+            </div>
+        </div>
+    </div>
+</div>

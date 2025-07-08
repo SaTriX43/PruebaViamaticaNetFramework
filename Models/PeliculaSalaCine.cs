@@ -16,6 +16,5 @@ namespace ProyectoPruebaViamatica.Models
         public DateTime fecha_publicacion { get; set; }
         public DateTime fecha_fin { get; set; }         
         public int id_pelicula { get; set; }         
-}
     }
 }
