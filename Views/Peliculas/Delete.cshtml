@@ -1,7 +1,37 @@
-﻿
+﻿@model ProyectoPruebaViamatica.Models.ViewModels.PeliculaViewModel
+
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Eliminar Película";
 }
 
-<h2>Delete</h2>
+<h2 class="mt-4">¿Estás seguro de que quieres eliminar esta película?</h2>
 
+<div class="alert alert-warning mt-3" role="alert">
+    ¡Advertencia! Esta acción eliminará la película de forma lógica (marcará como inactiva).
+</div>
+
+<div class="card mt-3">
+    <div class="card-header">
+        <strong>@Html.DisplayFor(model => model.nombre)</strong>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.id_pelicula)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.id_pelicula)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.duracion)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.duracion)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Activo)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Activo)</dd>
+        </dl>
+    </div>
+    <div class="card-footer">
+        @using (Html.BeginForm("Delete", "Peliculas", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <input type="submit" value="Eliminar" class="btn btn-danger" />
+            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-secondary ml-2" })
+        }
+    </div>
+</div>

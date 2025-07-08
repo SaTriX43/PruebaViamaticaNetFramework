@@ -1,7 +1,22 @@
-﻿
-@{
-    ViewBag.Title = "Confirmacion";
+﻿@{
+    ViewBag.Title = "Confirmación";
 }
 
-<h2>Confirmacion</h2>
+<h2 class="mt-4">Confirmación</h2>
 
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="alert alert-success mt-3" role="alert">
+        @ViewBag.Message
+    </div>
+}
+else
+{
+    <div class="alert alert-info mt-3" role="alert">
+        La operación se completó con éxito.
+    </div>
+}
+
+<div class="mt-4">
+    @Html.ActionLink("Volver al Inicio", "Index", "Home", null, new { @class = "btn btn-primary" })
+</div>

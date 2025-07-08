@@ -1,0 +1,46 @@
+﻿@model ProyectoPruebaViamatica.Models.SalaCine
+
+@{
+    ViewBag.Title = "Eliminar Sala de Cine";
+}
+
+<h2>Eliminar Sala de Cine</h2>
+
+<h3>¿Estás seguro de que quieres eliminar esta sala?</h3>
+<div>
+    <h4>SalaCine</h4>
+    <hr />
+
+    @* Este es el cambio clave para mostrar errores del ModelState *@
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm("Delete", "SalasCine", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.id_sala)
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            @Html.ActionLink("Volver a la Lista", "Index")
+        </div>
+    }
+</div>

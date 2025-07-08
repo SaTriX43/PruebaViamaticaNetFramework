@@ -1,7 +1,34 @@
-﻿
-@{
-    ViewBag.Title = "Disponibilidad";
+﻿@{
+    ViewBag.Title = "Verificar Disponibilidad de Sala";
 }
 
-<h2>Disponibilidad</h2>
+<h2>Verificar Disponibilidad de Sala</h2>
 
+<form method="get" action="@Url.Action("Disponibilidad", "SalasCine")">
+    <div class="form-group">
+        <label for="nombreSalaCine">Nombre de la Sala:</label>
+        <input type="text" id="nombreSalaCine" name="nombreSalaCine" class="form-control" value="@ViewBag.NombreSalaCine" />
+    </div>
+    <button type="submit" class="btn btn-primary">Verificar Disponibilidad</button>
+</form>
+
+<hr />
+
+@if (ViewBag.EstadoDisponibilidad != null)
+{
+    <div class="alert alert-info">
+        <strong>Sala:</strong> @ViewBag.NombreSalaCine<br />
+        <strong>Estado de Disponibilidad:</strong> @ViewBag.EstadoDisponibilidad
+    </div>
+}
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Volver a la Lista de Salas", "Index")
+</div>

@@ -204,6 +204,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <None Include="README.md" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -225,6 +226,9 @@
     <Content Include="Views\PeliculaSalaCine\Asignar.cshtml" />
     <Content Include="Views\PeliculaSalaCine\Confirmacion.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\SalasCine\Create.cshtml" />
+    <Content Include="Views\SalasCine\Edit.cshtml" />
+    <Content Include="Views\SalasCine\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

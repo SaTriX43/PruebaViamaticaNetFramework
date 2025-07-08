@@ -1,9 +1,10 @@
 ﻿using ProyectoPruebaViamatica.Models;
 using ProyectoPruebaViamatica.Services;
+using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using System;
 
 namespace ProyectoPruebaViamatica.Controllers
 {
@@ -39,14 +40,9 @@ namespace ProyectoPruebaViamatica.Controllers
             {
                 estadoDisponibilidad = await _salaCineService.ObtenerEstadoSalaCinePorNombre(nombreSalaCine);
 
-                if (string.IsNullOrEmpty(estadoDisponibilidad))
-                {
-                    ViewBag.ErrorMessage = $"No se encontró información de disponibilidad para la sala '{nombreSalaCine}' o la sala no existe.";
-                    return View();
-                }
 
                 ViewBag.NombreSalaCine = nombreSalaCine;
-                ViewBag.EstadoDisponibilidad = estadoDisponibilidad;
+                ViewBag.EstadoDisponibilidad = estadoDisponibilidad; 
                 return View();
             }
             catch (ArgumentException argEx)
@@ -56,10 +52,117 @@ namespace ProyectoPruebaViamatica.Controllers
             }
             catch (Exception ex)
             {
+                
                 Console.WriteLine($"Error en SalasCineController.Disponibilidad: {ex.Message}");
                 ViewBag.ErrorMessage = "Ocurrió un error inesperado al verificar la disponibilidad. Por favor, intente de nuevo más tarde.";
                 return View();
             }
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+     
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create(SalaCine salaCine)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    int newId = await _salaCineService.CrearSala(salaCine);
+                    if (newId > 0)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    ModelState.AddModelError("", "No se pudo crear la sala de cine.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en SalasCineController.Create (POST): {ex.Message}");
+                ModelState.AddModelError("", $"Ocurrió un error al crear la sala: {ex.Message}");
+            }
+            return View(salaCine);
+        }
+
+        
+        public async Task<ActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SalaCine salaCine = await _salaCineService.ObtenerPorId(id.Value);
+            if (salaCine == null)
+            {
+                return HttpNotFound();
+            }
+            return View(salaCine);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(SalaCine salaCine)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    bool updated = await _salaCineService.ActualizarSala(salaCine);
+                    if (updated)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    ModelState.AddModelError("", "No se pudo actualizar la sala de cine o no se encontró.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en SalasCineController.Edit (POST): {ex.Message}");
+                ModelState.AddModelError("", $"Ocurrió un error al actualizar la sala: {ex.Message}");
+            }
+            return View(salaCine);
+        }
+
+        
+        public async Task<ActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SalaCine salaCine = await _salaCineService.ObtenerPorId(id.Value);
+            if (salaCine == null)
+            {
+                return HttpNotFound();
+            }
+            return View(salaCine);
+        }
+
+        
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int id)
+        {
+            try
+            {
+                bool deleted = await _salaCineService.EliminarSalaLogica(id);
+                if (deleted)
+                {
+                    return RedirectToAction("Index");
+                }
+                ModelState.AddModelError("", "No se pudo eliminar la sala de cine o no se encontró.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en SalasCineController.DeleteConfirmed: {ex.Message}");
+                ModelState.AddModelError("", $"Ocurrió un error al eliminar la sala: {ex.Message}");
+            }
+            return RedirectToAction("Index");
         }
     }
 }

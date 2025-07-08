@@ -1,5 +1,4 @@
-﻿// DAL/Repositories/ISalaCineRepository.cs
-using ProyectoPruebaViamatica.Models; // Asegúrate de que esta ruta sea correcta para tu modelo SalaCine
+﻿using ProyectoPruebaViamatica.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,5 +9,8 @@ namespace ProyectoPruebaViamatica.DAL.Repositories
         Task<SalaCine> ObtenerPorId(int id);
         Task<IEnumerable<SalaCine>> ObtenerTodos();
         Task<string> ObtenerDisponibilidadSalaCine(string nombreSalaCine);
+        Task<int> CrearSala(SalaCine salaCine);
+        Task<bool> ActualizarSala(SalaCine salaCine);
+        Task<bool> EliminarSalaLogica(int id);
     }
 }

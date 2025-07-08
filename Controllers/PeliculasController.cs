@@ -122,10 +122,42 @@ namespace ProyectoPruebaViamatica.Controllers
             return View("Index", peliculas); 
         }
 
-        public async Task<ActionResult> PresentarPeliculasPorFechaPublicacion(DateTime fecha)
+        public async Task<ActionResult> PresentarPeliculasPorFechaPublicacion(DateTime? fecha) 
         {
-            var peliculas = await _peliculaService.PresentarPeliculasPorFechaPublicacion(fecha);
-            return View("Index", peliculas); 
+            IEnumerable<PeliculaViewModel> peliculas = new List<PeliculaViewModel>();
+
+            try
+            {
+                if (fecha.HasValue) 
+                {
+                    var peliculasDesdeDb = await _peliculaService.PresentarPeliculasPorFechaPublicacion(fecha.Value);
+                    peliculas = peliculasDesdeDb.Select(p => new PeliculaViewModel
+                    {
+                        id_pelicula = p.id_pelicula,
+                        nombre = p.nombre,
+                        duracion = p.duracion,
+                        Activo = p.Activo
+                    }).ToList();
+                }
+                else 
+                {
+                    var todasLasPeliculas = await _peliculaService.ObtenerTodasLasPeliculas();
+                    peliculas = todasLasPeliculas.Select(p => new PeliculaViewModel
+                    {
+                        id_pelicula = p.id_pelicula,
+                        nombre = p.nombre,
+                        duracion = p.duracion,
+                        Activo = p.Activo
+                    }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+               
+                ModelState.AddModelError("", "Ocurrió un error al buscar películas: " + ex.Message);
+                return View("Index", new List<PeliculaViewModel>());
+            }
+            return View("Index", peliculas);
         }
     }
 }
